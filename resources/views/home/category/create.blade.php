@@ -1,7 +1,7 @@
 @extends('home.parent')
 
 @section('content')
-    <div class="row">
+    <div class="row card">
         <h1>ini create</h1>
 
         <form action="{{ route('category.index') }}" method="post" enctype="multipart/form-data">

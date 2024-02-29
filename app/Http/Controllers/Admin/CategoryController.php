@@ -6,6 +6,7 @@ use App\Models\Category;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Storage;
 
 class CategoryController extends Controller
 {
@@ -16,10 +17,12 @@ class CategoryController extends Controller
      */
     public function index()
     {
+        $title = 'Category - Index';
         //ngurutin data berdasarkan data terbaru
         $category = Category::latest()->get();
         return view('home.category.index', compact(
-            'category'
+            'category',
+            'title'
         ));
     }
 
@@ -30,8 +33,10 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        //
-        return view('home.category.create');
+        $title = 'Create Category';
+        return view('home.category.create', compact(
+            'title'
+        ));
     }
 
     /**
@@ -83,6 +88,12 @@ class CategoryController extends Controller
     public function edit($id)
     {
         //
+        $title = 'Category - Edit';
+        $category = Category::find($id);
+        return view('home.category.edit', compact(
+            'category',
+            'title'
+        ));
     }
 
     /**
@@ -95,6 +106,37 @@ class CategoryController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $this->validate($request,[
+            'name' => 'required|max:225',
+            'image' => 'required|image|mimes:jpeg,png,jpg|max:2048'
+        ]);
+
+        $category = Category::find($id);
+
+        if($request->image == ''){
+            $category::updated([
+                'name' => $request->name,
+                'slug' => Str::slug($request->name)
+            ]);
+            return redirect()->route('category.index');
+        }else{
+            //jika mau diupdate, hapus gambar lama
+            Storage::disk('local')->delete('public/category/' .basename($category->image));
+
+            //upload img baru
+            $image = $request->file('image');
+            $image->storeAs('public/category/', $image->hashName());
+
+            //update data
+            $category->update([
+                'name' =>$request->name,
+                'slug' => Str::slug($request->name),
+                'image' => $image->hashName()
+            ]);
+
+            return redirect()->route('category.index');
+        }
+
     }
 
     /**

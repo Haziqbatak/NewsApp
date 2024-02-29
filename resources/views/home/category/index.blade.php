@@ -5,7 +5,7 @@
         <div class="card p-4">
             <h1>Category index</h1>
             <div class="d-flex justify-content-end">
-                <a href="{{ route('category.create') }}" class="btn btn-primary rounded">Category index <i
+                <a href="{{ route('category.create') }}" class="btn btn-primary rounded"><i
                         class="bi bi-plus circle"></i></a>
             </div>
 
@@ -32,30 +32,17 @@
                                         <img src="{{ url('storage/category', $row->image) }}" alt="image" width="100px">
                                     </td>
                                     <td>
-                                        <!-- Basic Modal -->
+                                        <!-- show using modal with id {{ $row->id }} -->
                                         <button type="button" class="btn btn-primary" data-bs-toggle="modal"
                                             data-bs-target="#basicModal{{ $row->id }}">
-                                            Basic Modal
+                                            <i class="bi bi-eye"></i>
                                         </button>
-                                        <div class="modal fade" id="basicModal{{ $row->id }}" tabindex="-1">
-                                            <div class="modal-dialog">
-                                                <div class="modal-content">
-                                                    <div class="modal-header">
-                                                        <h5 class="modal-title">Category Name : <strong class="text-uppercase fw-bold">{{ $row->name }}</strong></h5>
-                                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                                            aria-label="Close"></button>
-                                                    </div>
-                                                    <div class="modal-body">
-                                                        <img src="{{ url('storage/category', $row->image) }}" alt="image" class="img-thumbnail">
-                                                    </div>
-                                                    <div class="modal-footer">
-                                                        <button type="button" class="btn btn-secondary"
-                                                            data-bs-dismiss="modal">Close</button>
-                                                        <button type="button" class="btn btn-primary">Save changes</button>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div><!-- End Basic Modal-->
+                                        @include('home.category.include.modal-show')
+                                    <!-- Button edit with route 
+                                    category.edit {{ $row->edit }} -->
+                                    <a href="{{ route('category.edit', $row->id) }}" class="btn btn-warning">
+                                        <i class="bi bi-pencil-square"></i>
+                                    </a>
                                     </td>
                                 </tbody>
                             @empty
