@@ -8,12 +8,14 @@
             </h1>
             <hr>
             <div class="card">
+                <div class="card-title">
+                    <h3>Detail Card</h3>
+                </div>
                 <!-- List group with active and disabled items -->
                 <ul class="list-group">
-                    <li class="list-group-item active" aria-current="true">An active item</li>
-                    <li class="list-group-item">A second item</li>
-                    <li class="list-group-item">A third item</li>
-                    <li class="list-group-item">A fourth item</li>
+                    <li class="list-group-item active" aria-current="true">Name Account : <strong>Admin</strong></li>
+                    <li class="list-group-item">Email Account : <strong>{{ Auth::user()->name }}</strong></li>
+                    <li class="list-group-item">Role Account : <strong>{{ Auth::user()->name }}</strong></li>
                     <li class="list-group-item disabled" aria-disabled="true">A disabled item</li>
                 </ul><!-- End ist group with active and disabled items -->
 
