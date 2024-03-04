@@ -60,6 +60,7 @@
                                 <p>blum ada category</p>
                             @endforelse
                         </table>
+                    {{ $category->links('pagination::bootstrap-5') }}
                     </div>
                 </div>
             </div>
