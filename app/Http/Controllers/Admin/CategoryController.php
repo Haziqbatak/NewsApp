@@ -48,7 +48,7 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         //
-        $this->validate($request,[
+        $this->validate($request, [
             'name' => 'required|max:225',
             'image' => 'required|image|mimes:jpeg,png,jpg|max:2048'
         ]);
@@ -57,15 +57,16 @@ class CategoryController extends Controller
         $image = $request->file('image');
         $image->storeAs('public/category', $image->hashName());
 
-        Category::create([
-            'name'=>$request->name,
-            'slug'=>Str::slug($request->name),
-            'image'=>$image->hashName()
-        ]);
-
-        return redirect()->route('category.index')
-        ->with('succes', 'Category berhasil dibuat');
-
+        if (
+            Category::create([
+                'name' => $request->name,
+                'slug' => Str::slug($request->name),
+                'image' => $image->hashName()
+            ])
+        ) {
+            return redirect()->route('category.index')
+                ->with('succes', 'Category berhasil dibuat');
+        }
     }
 
     /**
@@ -106,22 +107,22 @@ class CategoryController extends Controller
     public function update(Request $request, $id)
     {
         //
-        $this->validate($request,[
+        $this->validate($request, [
             'name' => 'required|max:225',
             'image' => 'required|image|mimes:jpeg,png,jpg|max:2048'
         ]);
 
         $category = Category::find($id);
 
-        if($request->image == ''){
+        if ($request->image == '') {
             $category::updated([
                 'name' => $request->name,
                 'slug' => Str::slug($request->name)
             ]);
             return redirect()->route('category.index');
-        }else{
+        } else {
             //jika mau diupdate, hapus gambar lama
-            Storage::disk('local')->delete('public/category/' .basename($category->image));
+            Storage::disk('local')->delete('public/category/' . basename($category->image));
 
             //upload img baru
             $image = $request->file('image');
@@ -129,14 +130,13 @@ class CategoryController extends Controller
 
             //update data
             $category->update([
-                'name' =>$request->name,
+                'name' => $request->name,
                 'slug' => Str::slug($request->name),
                 'image' => $image->hashName()
             ]);
 
             return redirect()->route('category.index');
         }
-
     }
 
     /**
@@ -153,12 +153,11 @@ class CategoryController extends Controller
         // delete image
         // basename utk mengambil nama file
 
-        Storage::disk('local')->delete('public/category/' .basename($category->image));
+        Storage::disk('local')->delete('public/category/' . basename($category->image));
 
         // delete data by id
         $category->delete();
 
         return redirect()->route('category.index');
-
     }
 }
