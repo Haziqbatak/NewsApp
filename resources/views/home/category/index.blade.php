@@ -8,6 +8,13 @@
                 <a href="{{ route('category.create') }}" class="btn btn-primary rounded"><i
                         class="bi bi-plus circle"></i></a>
             </div>
+            @if (session('success'))
+                <div class="alert alert-success mt-3">
+                    <ul>
+                        {{ session('success') }}
+                    </ul>
+                </div>
+            @endif
 
             <div class="continer mt-3">
                 <div class="card">
