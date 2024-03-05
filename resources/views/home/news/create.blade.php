@@ -17,12 +17,18 @@
                 <label for="inputName" class="form-label">News image</label>
                 <input type="file" class="form-control" id="inputNanme4" name="image" value="{{ old('image') }}">
             </div>
-            @foreach ($category as $row)
-                <div class="col">
-                    ID = {{ $row->id }}
-                    Name : {{ $row->name }}
+            <div class="mb-2">
+                <label class="col-sm-2 col-form-label">Select</label>
+                <div class="col-sm-10">
+                    <select class="form-select" name="category_id" aria-label="Default select example">
+                        <option selected>Open this select menu</option>
+                        @foreach ($category as $row)
+                        <option value="{{ $row->id 
+                        }} " >{{ $row->name }}</option>
+                        @endforeach
+                    </select>
                 </div>
-            @endforeach
+            </div>
 
             {{-- menggunakan checkeditro --}}
             <textarea id="editor" name="content"></textarea>
