@@ -40,7 +40,13 @@ class NewsController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //validasi
+        $this->validate($request,[
+            'title' => 'required',
+            'image' => 'required|image|mimes:png,jpg|max:5120',
+            'content' => 'required',
+            'category_id' => 'required',
+        ]);
     }
 
     /**
