@@ -17,21 +17,25 @@
                 <label for="inputName" class="form-label">News image</label>
                 <input type="file" class="form-control" id="inputNanme4" name="image" value="{{ old('image') }}">
             </div>
-            <div class="mb-2">
-                <label class="col-sm-2 col-form-label">Select</label>
+            <div class="mb-3">
+                <label class="col col-form-label">choose category</label>
                 <div class="col-sm-10">
                     <select class="form-select" name="category_id" aria-label="Default select example">
-                        <option selected>Open this select menu</option>
+                        <option selected></option>
                         @foreach ($category as $row)
-                        <option value="{{ $row->id 
-                        }} " >{{ $row->name }}</option>
+                            <option value="{{ $row->id }} ">{{ $row->name }}</option>
                         @endforeach
                     </select>
                 </div>
             </div>
 
+            <div class="mb-">
+                <label class="col col-form-label">Content</label>
+                <textarea id="editor" name="content"></textarea>
+
+            </div>
+
             {{-- menggunakan checkeditro --}}
-            <textarea id="editor" name="content"></textarea>
             <script>
                 ClassicEditor
                     .create(document.querySelector('#editor'))
