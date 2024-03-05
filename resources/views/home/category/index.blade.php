@@ -8,10 +8,10 @@
                 <a href="{{ route('category.create') }}" class="btn btn-primary rounded"><i
                         class="bi bi-plus circle"></i></a>
             </div>
-            @if (session('success'))
+            @if (session('succes'))
                 <div class="alert alert-success mt-3">
                     <ul>
-                        {{ session('success') }}
+                        {{ session('succes') }}
                     </ul>
                 </div>
             @endif
