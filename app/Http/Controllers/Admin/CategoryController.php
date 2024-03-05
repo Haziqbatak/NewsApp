@@ -158,6 +158,6 @@ class CategoryController extends Controller
         // delete data by id
         $category->delete();
 
-        return redirect()->route('category.index');
+        return redirect()->route('category.index')->with('Nice', 'Data berhasil di delete');
     }
 }
