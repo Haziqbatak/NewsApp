@@ -1,14 +1,13 @@
 @extends('home.parent')
 
 @section('content')
-
-<div class="row">
-    <div class="card p-4">
-        <h2>News Index</h2>
-        <div class="d-flex justify-content-end">
-            <a href="{{ route('category.create') }}" class="btn btn-primary rounded"><i class="bi bi-plus circle"></i></a>
+    <div class="row">
+        <div class="card p-4">
+            <h3>News Card</h3>
         </div>
+        <form action="{{ route('news.create') }}" method="POST" enctype="multipart/form-data">
+            @csrf
+            @method('POST')
+        </form>
     </div>
-</div>
-
 @endsection
