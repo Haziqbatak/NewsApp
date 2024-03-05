@@ -35,6 +35,9 @@
 
             </div>
 
+            <div class="d-flex justify-content-end mt-2">
+                <button class="btn btn-primary" type="submit"><i class="bi bi-play"></i> Submit</button>
+            </div>
             {{-- menggunakan checkeditro --}}
             <script>
                 ClassicEditor
@@ -46,6 +49,10 @@
                         console.error(error);
                     });
             </script>
+
+
+
+
         </form>
     </div>
 @endsection
