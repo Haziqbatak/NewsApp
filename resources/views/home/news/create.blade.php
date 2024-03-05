@@ -17,6 +17,12 @@
                 <label for="inputName" class="form-label">News image</label>
                 <input type="file" class="form-control" id="inputNanme4" name="image" value="{{ old('image') }}">
             </div>
+            @foreach ($category as $row)
+                <div class="col">
+                    ID = {{ $row->id }}
+                    Name : {{ $row->name }}
+                </div>
+            @endforeach
 
             {{-- menggunakan checkeditro --}}
             <textarea id="editor" name="content"></textarea>
