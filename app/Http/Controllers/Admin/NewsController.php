@@ -15,6 +15,9 @@ class NewsController extends Controller
     public function index()
     {
         //
+        $title = 'Index News';
+        return view('home.news.index', compact('title'));
+        //compact berfungsi mengirim data ke view
     }
 
     /**

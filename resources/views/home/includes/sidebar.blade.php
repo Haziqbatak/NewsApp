@@ -20,6 +20,12 @@
             </li>
         @else
         @endif
+        <li class="nav-item">
+            <a class="nav-link " href="{{ route('news.index') }}">
+                <i class="bi bi-newspaper"></i>
+                <span>News</span>
+            </a>
+        </li>
 
     </ul>
 
