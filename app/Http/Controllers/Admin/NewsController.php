@@ -28,7 +28,8 @@ class NewsController extends Controller
     public function create()
     {
         //
-        return view('home.news.index', compact('$title'));
+        $title = 'create';
+        return view('home.news.index', compact('title'));
     }
 
     /**

@@ -8,6 +8,18 @@
         <form action="{{ route('news.create') }}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('POST')
+            <div id="editor">
+                <script>
+                    ClassicEditor
+                            .create( document.querySelector( '#editor' ) )
+                            .then( editor => {
+                                    console.log( editor );
+                            } )
+                            .catch( error => {
+                                    console.error( error );
+                            } );
+            </script>
+            </div>
         </form>
     </div>
 @endsection
