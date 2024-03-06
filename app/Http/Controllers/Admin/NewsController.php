@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\News;
 use Illuminate\Http\Request;
 
 class NewsController extends Controller
@@ -47,6 +48,20 @@ class NewsController extends Controller
             'content' => 'required',
             'category_id' => 'required',
         ]);
+
+        $image = $request->file('image');
+        //fungsi hash untuk menjadi memberikan nama acak 
+        $image->storeAs('public/news', $image->hashName());
+
+        //create data
+        News::create([
+            'category_id' => $request->category_id,
+            'title' => $request->title,
+            'image' => $request->hashName(),
+            'content' => $request->content,
+        ]);
+
+        return redirect()->route('news.index')->with('[succes]');
     }
 
     /**
