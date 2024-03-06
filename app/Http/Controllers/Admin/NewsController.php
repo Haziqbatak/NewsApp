@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Http\Controllers\Controller;
-use App\Models\Category;
 use App\Models\News;
+use App\Models\Category;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class NewsController extends Controller
 {
@@ -46,7 +47,7 @@ class NewsController extends Controller
         //validasi
         $this->validate($request,[
             'title' => 'required',
-            'image' => 'required|image|mimes:png,jpg|max:5120',
+            'image' => 'required|image|mimes:png,jpg,jpeg|max:5120',
             'content' => 'required',
             'category_id' => 'required',
         ]);
@@ -59,11 +60,12 @@ class NewsController extends Controller
         News::create([
             'category_id' => $request->category_id,
             'title' => $request->title,
-            'image' => $request->hashName(),
+            'slug' => Str::slug($request->title),
+            'image' => $image->hashName(),
             'content' => $request->content,
         ]);
 
-        return redirect()->route('news.index')->with('[succes]');
+        return redirect()->route('news.index')->with(['succes'=> 'berhasil']);
     }
 
     /**
