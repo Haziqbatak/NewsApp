@@ -5,21 +5,8 @@
         <div class="card p-4">
             <h3>News Card</h3>
         </div>
-        <form action="{{ route('news.create') }}" method="POST" enctype="multipart/form-data">
-            @csrf
-            @method('POST')
-            <div id="editor">
-                <script>
-                    ClassicEditor
-                            .create( document.querySelector( '#editor' ) )
-                            .then( editor => {
-                                    console.log( editor );
-                            } )
-                            .catch( error => {
-                                    console.error( error );
-                            } );
-            </script>
-            </div>
-        </form>
+        
+        <a href="{{ route('news.create') }}" class="btn btn-primer">Create</a>
+
     </div>
 @endsection

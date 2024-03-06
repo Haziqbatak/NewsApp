@@ -5,7 +5,7 @@
         <div class="card p-4">
             <h3>News Card</h3>
         </div>
-        <form action="{{ route('news.create') }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('news.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
             @method('POST')
 
