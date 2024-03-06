@@ -35,7 +35,7 @@
                                 <td>{{ $row->title }}</td>
                                 <td>{{ $row->category->name }}</td>
                                 <td>
-                                    <img src="{{ $row->image }}" width="500px" alt="">
+                                    <img src="{{ $row->image }}" alt="">
                                 </td>
                                 <td>
                                     <img src="{{ $row->category->image }}" width="100px" alt="">
