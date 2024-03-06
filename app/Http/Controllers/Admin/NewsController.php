@@ -17,10 +17,16 @@ class NewsController extends Controller
      */
     public function index()
     {
+        $news = News::latest()->paginate('5');
+        $category = Category::all();
         //
         $title = 'Index News';
-        return view('home.news.index', compact('title'));
+        return view('home.news.index', compact('title', 'news', 'category'));
         //compact berfungsi mengirim data ke view
+
+        //get data terbaru
+        // yang diambil dari variabel diatas
+        
     }
 
     /**
