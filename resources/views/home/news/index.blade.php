@@ -31,11 +31,11 @@
                     <tbody>
                         @forelse ($news as $row)
                             <tr>
-                                <td>{{ @$loop->iteration }}</td>
+                                <td>{{ $loop->iteration }}</td>
                                 <td>{{ $row->title }}</td>
                                 <td>{{ $row->category->name }}</td>
                                 <td>
-                                    <img src="{{ $row->image }}" alt="">
+                                    <img src="{{ $row->image }}" width="100px" alt="">
                                 </td>
                                 <td>
                                     <img src="{{ $row->category->image }}" width="100px" alt="">
