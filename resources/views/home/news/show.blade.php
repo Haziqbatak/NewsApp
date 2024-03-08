@@ -22,6 +22,13 @@
                         console.error(error);
                     });
             </script>
+
+            <div class="container">
+                <div class="d-flex jusify-content-end">
+                    <a class="btn btn-info" href="{{ route('news.index') }}">
+                        <i class="bi bi-arrow-left"></i></a>
+                </div>
+            </div>
         </div>
     </div>
 @endsection

@@ -100,7 +100,11 @@ class NewsController extends Controller
      */
     public function edit($id)
     {
-        //
+        //get data by id
+        $news = News::FindOrFail($id);
+        $title = 'title';
+        return view('home.news.edit', compact('title', 'news'));
+
     }
 
     /**
