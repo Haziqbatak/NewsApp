@@ -7,6 +7,7 @@ use App\Models\Category;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class NewsController extends Controller
 {
@@ -83,6 +84,12 @@ class NewsController extends Controller
     public function show($id)
     {
         //
+        $title = 'show';
+        // get data by id
+        $news = News::findOrFail($id);
+        // fungsi find or fail untuk menemukan data(bila tak ada = not found)
+        return view('home.news.show', compact('title', 'news'));
+        
     }
 
     /**
