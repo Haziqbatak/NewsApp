@@ -49,10 +49,6 @@
                         console.error(error);
                     });
             </script>
-
-
-
-
         </form>
     </div>
 @endsection
