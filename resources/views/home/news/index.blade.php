@@ -41,7 +41,7 @@
                                     <img src="{{ $row->category->image }}" width="100px" alt="">
                                 </td>
                                 <td><a href="{{ route('news.show', $row->id) }}" class="btn btn-info"><i class="bi bi-eye"></i></a></td>
-                                <td><button class="btn btn-info"><i class="bi bi-pencil"></i></button></td>
+                                <td><a href="{{ route('news.edit', $row->id) }}" class="btn btn-info"><i class="bi bi-pencil"></i></a></td>
                                 <td><button class="btn btn-info"><i class="bi bi-bi bi-trash"></i></button></td>
                             </tr>
                         @empty

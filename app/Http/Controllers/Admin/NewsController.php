@@ -102,8 +102,9 @@ class NewsController extends Controller
     {
         //get data by id
         $news = News::FindOrFail($id);
+        $category = Category::all();
         $title = 'title';
-        return view('home.news.edit', compact('title', 'news'));
+        return view('home.news.edit', compact('title', 'news', 'category'));
 
     }
 
