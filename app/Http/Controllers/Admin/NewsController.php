@@ -139,7 +139,7 @@ class NewsController extends Controller
             Storage::disk('local')->delete('public/news/'. basename($news->image));
 
             $news->request->file('image');
-            $news->storage('');
+            $news->storeAs('public/news');
         };
     }
 
