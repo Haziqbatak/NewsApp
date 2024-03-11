@@ -162,5 +162,11 @@ class NewsController extends Controller
     public function destroy($id)
     {
         //
+        $news = News::findOrFail($id);
+
+        $image = $news->image;
+        Storage::disk('local')->delete('public/news/'. basename($image));
+        $news->delete();
+        return redirect()->route('news.index')->with('succes', 'News berhasil di hapus');
     }
 }

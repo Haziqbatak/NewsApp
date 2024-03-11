@@ -40,12 +40,22 @@
                                 <td>
                                     <img src="{{ $row->category->image }}" width="100px" alt="">
                                 </td>
-                                <td><a href="{{ route('news.show', $row->id) }}" class="btn btn-info"><i class="bi bi-eye"></i></a></td>
-                                <td><a href="{{ route('news.edit', $row->id) }}" class="btn btn-info"><i class="bi bi-pencil"></i></a></td>
-                                <td><button class="btn btn-info"><i class="bi bi-bi bi-trash"></i></button></td>
+                                <td><a href="{{ route('news.show', $row->id) }}" class="btn btn-info"><i
+                                            class="bi bi-eye"></i></a></td>
+                                <td><a href="{{ route('news.edit', $row->id) }}" class="btn btn-warning"><i
+                                            class="bi bi-pencil"></i></a></td>
+                                <td>
+                                    <form action="{{ route('news.destroy', $row->id) }}" method="POST"
+                                        enctype="multipart/form-data">
+                                        @csrf
+                                        @method('DELETE')
+                                        <button type="submit" class="btn btn-danger"><i
+                                                class="bi bi-bi bi-trash"></i></button>
+                                    </form>
+                                </td>
                             </tr>
                         @empty
-                        <p>masih kosong</p>
+                            <p>masih kosong</p>
                         @endforelse
                     </tbody>
                 </table>
