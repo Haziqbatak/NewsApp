@@ -138,8 +138,8 @@ class NewsController extends Controller
             $news = News::FindOrFail($id);
             Storage::disk('local')->delete('public/news/'. basename($news->image));
 
-            $news->request->file('image');
-            $news->storeAs('public/news');
+            $image = $request->file('image');
+            $image->storeAs('public/news', $image->hashName());
         };
     }
 
