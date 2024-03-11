@@ -7,7 +7,7 @@
         </div>
         <form action="{{ route('news.update', $news->id) }}" method="POST" enctype="multipart/form-data">
             @csrf
-            @method('POST')
+            @method('PUT')
 
             <div class="mb-2">
                 <label for="inputName" class="form-label"><i class="bi bi-text"></i> News Title</label>
@@ -39,7 +39,7 @@
             </div>
 
             <div class="d-flex justify-content-end mt-2">
-                <button class="btn btn-primary" type="submit"><i class="bi bi-play"></i> Submit</button>
+                <button class="btn btn-primary" type="submit"><i class="bi bi-pencil"></i> Update News</button>
             </div>
             {{-- menggunakan checkeditro --}}
             <script>

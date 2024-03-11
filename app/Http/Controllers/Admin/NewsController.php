@@ -8,6 +8,7 @@ use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class NewsController extends Controller
 {
@@ -27,7 +28,7 @@ class NewsController extends Controller
 
         //get data terbaru
         // yang diambil dari variabel diatas
-        
+
     }
 
     /**
@@ -52,7 +53,7 @@ class NewsController extends Controller
     public function store(Request $request)
     {
         //validasi
-        $this->validate($request,[
+        $this->validate($request, [
             'title' => 'required',
             'image' => 'required|image|mimes:png,jpg,jpeg|max:5120',
             'content' => 'required',
@@ -72,7 +73,7 @@ class NewsController extends Controller
             'content' => $request->content,
         ]);
 
-        return redirect()->route('news.index')->with(['succes'=> 'berhasil']);
+        return redirect()->route('news.index')->with(['succes' => 'berhasil']);
     }
 
     /**
@@ -89,7 +90,6 @@ class NewsController extends Controller
         $news = News::findOrFail($id);
         // fungsi find or fail untuk menemukan data(bila tak ada = not found)
         return view('home.news.show', compact('title', 'news'));
-        
     }
 
     /**
@@ -105,7 +105,6 @@ class NewsController extends Controller
         $category = Category::all();
         $title = 'title';
         return view('home.news.edit', compact('title', 'news', 'category'));
-
     }
 
     /**
@@ -118,6 +117,30 @@ class NewsController extends Controller
     public function update(Request $request, $id)
     {
         //
+        $this->validate($request, [
+            'title' => 'required|max:255',
+            'category_id' => 'required',
+            'content' => 'required',
+            'image' => 'image|mimes:jpg,jpeg,png|max:5120'
+        ]);
+
+        $news = News::FindOrFail($id);
+
+        if ($request->file('image')) {
+            $news->update([
+                'title' => 'required|max:255',
+                'slug' =>Str::slug($request->title) ,
+                'category_id' => 'required',
+                'content' => 'required',
+                'image' => 'image|mimes:jpg,jpeg,png|max:5120'
+            ]);
+        }else{
+            $news = News::FindOrFail($id);
+            Storage::disk('local')->delete('public/news/'. basename($news->image));
+
+            $news->request->file('image');
+            $news->storage('');
+        };
     }
 
     /**
