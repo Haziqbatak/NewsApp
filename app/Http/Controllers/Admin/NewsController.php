@@ -132,7 +132,6 @@ class NewsController extends Controller
                 'slug' =>Str::slug($request->title) ,
                 'category_id' => 'required',
                 'content' => 'required',
-                'image' => 'image|mimes:jpg,jpeg,png|max:5120'
             ]);
         }else{
             $news = News::FindOrFail($id);
@@ -140,6 +139,15 @@ class NewsController extends Controller
 
             $image = $request->file('image');
             $image->storeAs('public/news', $image->hashName());
+
+            $news->update([
+                'title' => 'required|max:255',
+                'slug' =>Str::slug($request->title) ,
+                'category_id' => 'required',
+                'content' => 'required',
+                'image' => 'image|mimes:jpg,jpeg,png|max:5120'
+            ]);
+
         };
     }
 
