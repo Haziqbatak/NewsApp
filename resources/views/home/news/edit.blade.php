@@ -22,7 +22,6 @@
                 <div class="col-sm-10">
                     <select class="form-select" name="category_id" aria-label="Default select example">
                         <option value="{{ $news->category->id }}" selected>{{ $news->category->name }}</option>
-                        <option selected>Category</option>
                         @foreach ($category as $row)
                             <option value="{{ $row->id }} ">{{ $row->name }}</option>
                         @endforeach
