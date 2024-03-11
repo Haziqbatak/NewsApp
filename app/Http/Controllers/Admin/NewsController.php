@@ -144,11 +144,12 @@ class NewsController extends Controller
                 'title' => 'required|max:255',
                 'slug' =>Str::slug($request->title) ,
                 'category_id' => 'required',
-                'image' => 'image|mimes:jpg,jpeg,png|max:5120',
+                'image' => $image->hashName(),
                 'content' => 'required'
             ]);
-
         };
+
+        return redirect()->route('news.index')->with('succes', 'News berhasil diubah');
     }
 
     /**
