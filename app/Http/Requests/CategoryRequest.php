@@ -13,7 +13,7 @@ class CategoryRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,19 @@ class CategoryRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'name' =>['required', 'string', 'max:255'],
+            'image' =>['image', 'mimes|jpg,jpeg,png', 'max:5120']
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'name.required' => 'Nama kategori wajib diisi',
+            'name.max' => 'Nama kategori maksimal 255 karakter',
+            'image.image' => 'File yang diupload harus gambar',
+            'image.mimes' => 'File yang diupload harus berformat jpeg, png, jpg',
+            'image.max' => 'Ukuran gambar maksimal 5MB'
         ];
     }
 }
