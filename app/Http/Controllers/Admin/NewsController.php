@@ -127,25 +127,26 @@ class NewsController extends Controller
         $news = News::FindOrFail($id);
 
         if ($request->file('image')) {
-            $news->update([
-                'title' => 'required|max:255',
-                'slug' =>Str::slug($request->title) ,
-                'category_id' => 'required',
-                'content' => 'required',
-            ]);
-        }else{
             $news = News::FindOrFail($id);
-            Storage::disk('local')->delete('public/news/'. basename($news->image));
+            Storage::disk('local')->delete('public/news/' . basename($news->image));
 
             $image = $request->file('image');
             $image->storeAs('public/news', $image->hashName());
 
             $news->update([
                 'title' => 'required|max:255',
-                'slug' =>Str::slug($request->title) ,
-                'category_id' => 'required',
+                'slug' => Str::slug($request->title),
+                'category_id' => $request->category_id,
                 'image' => $image->hashName(),
-                'content' => 'required'
+                'content' => $request->content
+            ]);
+            
+        } else {
+            $news->update([
+                'title' => 'required|max:255',
+                'slug' => Str::slug($request->title),
+                'category_id' => $request->category_id,
+                'content' => $request->content,
             ]);
         };
 
