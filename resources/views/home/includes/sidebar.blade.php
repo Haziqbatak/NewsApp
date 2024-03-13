@@ -14,7 +14,7 @@
         @if (Auth::user()->role == 'admin')
             <li class="nav-item">
                 <a class="nav-link " href="{{ route('home') }}">
-                    <i class="bi bi-grid"></i>
+                    <i class="bi bi-earmark"></i>
                     <span>User</span>
                 </a>
             </li>
