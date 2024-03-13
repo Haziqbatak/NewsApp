@@ -10,6 +10,14 @@ class ProfileController extends Controller
     //
     public function index()
     {
-        return view('home.profile.index');
+        $title = 'profile';
+        return view('home.profile.index', compact('title'));
+    }
+
+    public function changePassword()
+    {
+        $title = 'changePassword';
+
+        return view('home.profile.changePassword', compact('title'));
     }
 }

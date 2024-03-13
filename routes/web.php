@@ -35,6 +35,7 @@ Route::resource('news', NewsController::class);
 Route::middleware('auth')->group(function(){
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
     Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
+    Route::get('/changePassword', [ProfileController::class, 'changePassword'])->name('profile.changePassword');
 
     // route for admin
     Route::middleware(['auth','admin'])->group(function(){
