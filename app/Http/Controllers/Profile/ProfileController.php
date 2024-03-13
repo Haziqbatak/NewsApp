@@ -40,10 +40,10 @@ class ProfileController extends Controller
 
                 $user->password = Hash::make($request->password);
                 $user->save;
-                return redirect()->back();
+                return redirect()->back()->with('succes','update berhasil');
             }
         }else{
-            return redirect()->back()->with('error', 'Current Password is Cannot');
+            return redirect()->back()->with('errors', 'Current Password is Cannot');
         }
     }
 }
