@@ -36,6 +36,7 @@ Route::middleware('auth')->group(function(){
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
     Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
     Route::get('/changePassword', [ProfileController::class, 'changePassword'])->name('profile.changePassword');
+    Route::put('/updatePassword', [ProfileController::class, 'updatePassword'])->name('profile.updatePassword');
 
     // route for admin
     Route::middleware(['auth','admin'])->group(function(){

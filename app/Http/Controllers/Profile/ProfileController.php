@@ -24,7 +24,7 @@ class ProfileController extends Controller
 
     public function updatePassword(Request $request)
     {
-        $request->validate($request,[
+        $this->validate($request,[
             'current_password' => 'required',
             'password' => 'required',
             'confirm_password' => 'required'
@@ -36,7 +36,11 @@ class ProfileController extends Controller
 
         if($currentPasswordStatus){
             if($request->password == $request->confirm_password){
-                
+                $user = auth()->user();
+
+                $user->password = Hash::make($request->password);
+                $user->save;
+                return redirect()->back();
             }
         }else{
             return redirect()->back()->with('error', 'Current Password is Cannot');

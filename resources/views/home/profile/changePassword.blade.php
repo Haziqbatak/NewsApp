@@ -4,13 +4,13 @@
     <div class="row">
         <div class="card p-4">
             <h3 class="card-title">Change Password</h3>
-            <form action="" method="post">
+            <form action="{{ route('profile.updatePassword') }}" method="post">
                 @csrf
                 @method('PUT')
                 <div class="row mb-3">
                     <label for="inputPassword" class="col-sm-2 col-form-label">Current Password</label>
                     <div class="col-sm-10">
-                        <input type="password" name="cuurent_password" class="form-control" placeholder="Current Password">
+                        <input type="password" name="current_password" class="form-control" placeholder="Current Password">
                     </div>
                 </div>
 
@@ -24,7 +24,8 @@
                 <div class="row mb-3">
                     <label for="inputPassword" class="col-sm-2 col-form-label">Confirm New Password</label>
                     <div class="col-sm-10">
-                        <input type="password" name="confirm_password" class="form-control" placeholder="Confirm New Password">
+                        <input type="password" name="confirm_password" class="form-control"
+                            placeholder="Confirm New Password">
                     </div>
                 </div>
 
@@ -33,4 +34,22 @@
             </form>
         </div>
     </div>
+
+    {{-- // alert jika ada error --}}
+    @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif
+
+    {{-- //alert success --}}
+    @if (session('success'))
+        <div class="alert alert-success">
+            {{ session('success') }}
+        </div>
+    @endif
 @endsection
