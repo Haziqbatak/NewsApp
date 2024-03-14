@@ -67,4 +67,12 @@ class ProfileController extends Controller
             'Password has been reset'
         );
     }
+
+    public function createProfile(){
+        $title = 'Create Profile';
+
+        return view('home.profile.create', compact(
+            'title'
+        ));
+    }
 }
