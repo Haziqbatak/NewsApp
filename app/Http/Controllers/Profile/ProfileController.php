@@ -46,4 +46,9 @@ class ProfileController extends Controller
             return redirect()->back()->with('errors', 'Current Password is Cannot');
         }
     }
+
+    public function allUser(){
+        $title = 'all User';
+        return view('home.user.index' , compact('title'));
+    }
 }
