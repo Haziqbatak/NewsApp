@@ -42,6 +42,7 @@ Route::middleware('auth')->group(function(){
     Route::middleware(['auth','admin'])->group(function(){
         // route for Category using Resource
         Route::resource('category', CategoryController::class)->except('show');
+        Route::get('/all_user', [ProfileController::class, 'allUser'])->name('allUser');
     });
 });
 
