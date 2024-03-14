@@ -2,8 +2,9 @@
 
 namespace App\Http\Controllers\Profile;
 
-use App\Http\Controllers\Controller;
+use App\Models\User;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 
 class ProfileController extends Controller
@@ -49,6 +50,10 @@ class ProfileController extends Controller
 
     public function allUser(){
         $title = 'all User';
-        return view('home.user.index' , compact('title'));
+        $user = User::where('role', 'user')->get();
+        return view('home.user.index' , compact(
+            'title',
+            'user'
+        ));
     }
 }
