@@ -3,12 +3,12 @@
 @section('content')
     <div class="card p-4">
         <div class="row">
-            <div class="col-md-6 flex justify-content-center">
+            <div class="col-md-6 flex justify-content-center text-center                                                                    ">
                 @if (empty(Auth::user()->profile->image))
                 <img src="https://ui-avatars.com/api/?background=#fffff/?name={{ Auth::user()->name }}"
                 class="rounded-circle w-75" alt="">
                 @else
-                    <img src="{{ Auth::user()->profile->image }}" alt="ini profile image" width="300px" class="rounded ">
+                    <img src="{{ Auth::user()->profile->image }}" alt="ini profile image" class="rounded-5 w-50">
                 @endif
             </div>
             <div class="col-md-6 text-center">
