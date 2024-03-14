@@ -40,7 +40,7 @@ class ProfileController extends Controller
                 $user = auth()->user();
 
                 $user->password = Hash::make($request->password);
-                $user->save;
+                $user->save();
                 return redirect()->back()->with('succes','update berhasil');
             }
         }else{
@@ -59,7 +59,12 @@ class ProfileController extends Controller
 
     public function resetPassword($id){
         $user = User::find($id);
-        $user->password = Hash::make('123456');
-        $user->save;
+        $user->password = Hash::make('12345');
+        $user->save();
+
+        return redirect()->back()->with(
+            'succes',
+            'Password has been reset'
+        );
     }
 }

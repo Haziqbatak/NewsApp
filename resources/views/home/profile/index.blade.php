@@ -4,8 +4,7 @@
     <div class="card p-4">
         <div class="row">
             <div class="col-md-6 flex justify-content-center">
-                <img src="https://ui-avatars.com/api/?background=#fffff/?name={{ Auth::user()->name }}"
-                    class="rounded-circle w-75" alt="">
+                
             </div>
             <div class="col-md-6 text-center">
                 <h3>Profile</h3>

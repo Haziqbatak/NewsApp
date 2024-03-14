@@ -35,14 +35,14 @@
         </div>
     </div>
 
-    {{-- // alert jika ada error --}}
-
     {{-- //alert success --}}
     @if (session('succes'))
         <div class="alert alert-success">
             {{ session('succes') }}
         </div>
     @endif
+    
+    {{-- // alert jika ada error --}}
     @if (session('errors'))
         <div class="alert alert-danger">
             {{ session('errors') }}
