@@ -25,7 +25,7 @@ class Profile extends Model
 
     public function image(): Attribute{
         return Attribute::make(
-            get: fn($value) => asset(('/storage/profile'. $value))
+            get: fn($value) => asset(('/storage/profile/'. $value))
         );
     }
 

@@ -44,7 +44,10 @@ Route::middleware('auth')->group(function(){
         Route::resource('category', CategoryController::class)->except('show');
         Route::get('/allUser', [ProfileController::class, 'allUser'])->name('allUser');
         Route::put('/resetPassword/{id}', [ProfileController::class, 'resetPassword'])->name('resetPassword');
-        Route::get('/createProfile', [ProfileController::class, 'createProfile'])->name('createProfile');
     });
+
+    Route::get('/createProfile', [ProfileController::class, 'createProfile'])->name('createProfile');
+    Route::post('/storeProfile', [ProfileController::class, 'storeProfile'])->name('storeProfile');
+
 });
 

@@ -75,4 +75,24 @@ class ProfileController extends Controller
             'title'
         ));
     }
+
+    public function storeProfile(Request $request){
+        $this->validate($request,[
+            'first_name' => 'required',
+            'image' =>'image|mimes:jpeg,jpg,png|max:2048'
+        ]);
+
+        $image = $request->file('image');
+        $image->storeAs('public/profile'
+        , $image->getClientOriginalName());
+
+        $user = auth()->user();
+
+        $user->profile()->create([
+            'first_name' => $request->first_name,
+            'image' => $image->getClientOriginalName()
+        ]);
+
+        return redirect()->route('profile.index')->with('succes', 'Profile has been created');
+    }
 }
