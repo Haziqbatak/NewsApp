@@ -56,4 +56,10 @@ class ProfileController extends Controller
             'user'
         ));
     }
+
+    public function resetPassword($id){
+        $user = User::find($id);
+        $user->password = Hash::make('123456');
+        $user->save;
+    }
 }
