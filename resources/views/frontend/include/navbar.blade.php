@@ -54,6 +54,16 @@
                 </form>
             </div><!-- End Search Form -->
 
+            @guest
+                <a href="{{ route('login') }}" class="text-sm text-gray-700 dark:text-gray-500 underline"><i
+                        class="bi bi-key-fill"></i></a>
+                <a href="{{ route('register') }}"
+                    class="ml-4 text-sm text-gray-700 dark:text-gray-500 underline">Register</a>
+            @else
+                <a href="{{ route('home') }}" class="text-sm text-gray-700 dark:text-gray-500 underline"><i
+                        class="bi bi-house"></i> {{ Auth::user()->name }}</a>
+            @endguest
+
         </div>
 
     </div>

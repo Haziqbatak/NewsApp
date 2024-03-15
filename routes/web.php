@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\NewsController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Profile\ProfileController;
+use App\Http\Controllers\frontend\FrontEndController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,9 +18,7 @@ use App\Http\Controllers\Profile\ProfileController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [FrontEndController::class, 'index']);
 
 Auth::routes();
 
@@ -33,7 +32,7 @@ Route::resource('news', NewsController::class);
 
 // route middleware
 Route::middleware('auth')->group(function(){
-    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+    Route::get('/homes', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
     Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
     Route::get('/changePassword', [ProfileController::class, 'changePassword'])->name('profile.changePassword');
     Route::put('/updatePassword', [ProfileController::class, 'updatePassword'])->name('profile.updatePassword');
