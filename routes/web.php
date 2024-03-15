@@ -48,6 +48,7 @@ Route::middleware('auth')->group(function(){
 
     Route::get('/createProfile', [ProfileController::class, 'createProfile'])->name('createProfile');
     Route::post('/storeProfile', [ProfileController::class, 'storeProfile'])->name('storeProfile');
+    Route::get('/editProfile', [ProfileController::class, 'editProfile'])->name('editProfile');
 
 });
 

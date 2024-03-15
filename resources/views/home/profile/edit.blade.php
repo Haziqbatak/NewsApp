@@ -19,9 +19,9 @@
                     <input type="file" class="form-control" name="image">
                 </div>
 
-                <button type="submit" class="btn btn-warning">
+                <button type="submit" class="btn btn-warning" class="{{ route('editProfile') }}">
                     <i class="bi bi-pencil">
-                        Create Profile
+                        Update Profile
                     </i>
                 </button>
 

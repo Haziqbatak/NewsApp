@@ -95,4 +95,14 @@ class ProfileController extends Controller
 
         return redirect()->route('profile.index')->with('succes', 'Profile has been created');
     }
+
+    public function editProfile(){
+        $title = 'Edit Profile';
+        $user = auth()->user();
+
+        return view('home.profile.edit', compact(
+            'title',
+            'user'
+        ));
+    }
 }
