@@ -17,7 +17,7 @@
                 <ul class="list-group">
                     <li class="list-group-item active" aria-current="true">Name Account : <strong>Admin</strong></li>
                     <li class="list-group-item">Email Account : <strong>{{ Auth::user()->name }}</strong></li>
-                    <li class="list-group-item">Your name : <strong>{{ Auth::user()->profile->first_name }}</strong></li>
+                    {{-- <li class="list-group-item">Your name : <strong>{{ Auth::user()->profile->first_name }}</strong></li> --}}
                     <li class="list-group-item">Role Account : <strong>{{ Auth::user()->name }}</strong></li>
                     <li class="list-group-item disabled" aria-disabled="true">A disabled item</li>
                 </ul>
