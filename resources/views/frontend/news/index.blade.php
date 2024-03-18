@@ -54,7 +54,7 @@
 
                 @foreach ($latestNews as $news)
                     <div class="d-lg-flex post-entry-2">
-                        <a href="single-post.html" class="me-4 thumbnail mb-4 mb-lg-0 d-inline-block">
+                        <a href="single-post.html" class="me-4 img-thumbnail mb-4 mb-lg-0 d-inline-block">
                             <img src="{{ $news->image }}" alt="" class="img-fluid">
                         </a>
                         <div>
