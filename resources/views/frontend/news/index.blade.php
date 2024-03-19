@@ -11,27 +11,30 @@
                         <div class="swiper-wrapper">
                             @foreach ($slidebar as $row)
                                 <div class="swiper-slide">
-                                    <img src="{{ $row->image }}" alt="">
-                                    <div class="img-bg-inner">
-                                        <h2>{{ $row->title }}</h2>
-                                        <p>{{ Str::limit(strip_tags($row->content, 100)) }}</p>
-                                    </div>
+                                    <a href="{{ route('detailNews', $row->slug) }}" class="img-bg d-flex align-items-end"
+                                        style="background-image: url('{{ $row->image }}');">
+                                        <div class="img-bg-inner">
+                                            <h2>{{ $row->title }}</h2>
+                                            <p>{{ Str::limit(strip_tags($row->content, 100)) }}</p>
+                                        </div>
                                     </a>
                                 </div>
                             @endforeach
-
-                        </div>
-                        <div class="custom-swiper-button-next">
-                            <span class="bi-chevron-right"></span>
-                        </div>
-                        <div class="custom-swiper-button-prev">
-                            <span class="bi-chevron-left"></span>
                         </div>
 
-                        <div class="swiper-pagination"></div>
+
                     </div>
+                    <div class="custom-swiper-button-next">
+                        <span class="bi-chevron-right"></span>
+                    </div>
+                    <div class="custom-swiper-button-prev">
+                        <span class="bi-chevron-left"></span>
+                    </div>
+
+                    <div class="swiper-pagination"></div>
                 </div>
             </div>
+        </div>
         </div>
     </section>
     <!-- End Hero Slider Section -->
@@ -42,7 +45,7 @@
 
                 <div class="section-header d-flex justify-content-between align-items-center mb-5">
                     <h2>{{ $row->name }}</h2>
-                    <div><a href="category.html" class="more">See All {{ $row->name }}</a></div>
+                    <div><a href="{{ route('detailCategory', $row->slug) }}" class="more">See All {{ $row->name }}</a></div>
                 </div>
 
                 @php
@@ -54,7 +57,8 @@
 
                 @foreach ($latestNews as $news)
                     <div class="d-lg-flex post-entry-2">
-                        <a href="single-post.html" class="me-4 img-thumbnail mb-4 mb-lg-0 d-inline-block">
+                        <a href="{{ route('detailNews', $news->slug) }}"
+                            class="me-4 img-thumbnail mb-4 mb-lg-0 d-inline-block">
                             <img src="{{ $news->image }}" alt="" class="img-fluid">
                         </a>
                         <div>
@@ -83,9 +87,7 @@
 
                 <div class="row">
                     <div class="col-md-9">
-
                         <div class="row">
-
                             @foreach ($row->news->random(1) as $news)
                                 <div class="col-lg-4">
                                     <div class="post-entry-1 border-bottom">
@@ -96,7 +98,8 @@
                                             <span class="mx-1">&bullet;</span>
                                             <span>{{ $news->created_at->diffForHumans() }}</span>
                                         </div>
-                                        <h2 class="mb-2"><a href="single-post.html">11 Work From Home Part-Time Jobs You
+                                        <h2 class="mb-2"><a href="{{ route('detailNews', $news->slug) }}">11 Work From
+                                                Home Part-Time Jobs You
                                                 Can Do Now</a></h2>
                                         <span class="author mb-3 d-block">Jenny Wilson</span>
                                         <p class="mb-4 d-block">Lorem ipsum dolor sit, amet consectetur adipisicing elit.

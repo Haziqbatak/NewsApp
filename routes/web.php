@@ -20,6 +20,8 @@ use App\Http\Controllers\frontend\FrontEndController;
 
 Route::get('/', [FrontEndController::class, 'index']);
 
+Route::get('/detail/news/{slug}', [\App\Http\Controllers\Frontend\FrontEndController::class, 'detailNews'])->name('detailNews');
+Route::get('/detail/category/{slug}', [\App\Http\Controllers\Frontend\FrontEndController::class, 'detailCategory'])->name('detailCategory');
 Auth::routes();
 
 // handle redirect register to login
