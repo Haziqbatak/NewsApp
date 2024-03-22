@@ -13,28 +13,29 @@ use Illuminate\Support\Facades\Hash;
 class AuthController extends Controller
 {
     //login
-    public function login(Request $request){
+    public function login(Request $request)
+    {
         try {
             //code...
             $this->validate($request, [
-                'email' =>'required|email',
+                'email' => 'required|email',
                 'password' => 'required'
             ]);
 
 
             // credential login
             $credentials = request(['email', 'password']);
-            if(!Auth::attempt([
+            if (!Auth::attempt([
                 'email' => $credentials['email'],
                 'password' => $credentials['password']
-            ])){
+            ])) {
                 return ResponseFormatter::error([
                     'message'  => 'Unautorized'
                 ], 'Authentication Failed', 500);
             };
 
             $user = User::where('email', $credentials['email'])->first();
-            if(!Hash::check($request->password, $user->password,  [])) {
+            if (!Hash::check($request->password, $user->password,  [])) {
                 throw new \Exception('Invalid Credentials');
             };
 
@@ -44,7 +45,6 @@ class AuthController extends Controller
                 'token_type' => 'Bearer',
                 'user' => $user
             ], 'Authentication Failed', 200);
-
         } catch (Exception $error) {
             return ResponseFormatter::error([
                 'message'  => 'Something went wrong',
@@ -53,20 +53,21 @@ class AuthController extends Controller
             //throw $th;
         }
     }
-    
-    public function register(Request $request){
+
+    public function register(Request $request)
+    {
         try {
-            $this->validate($request,[
+            $this->validate($request, [
                 'name' => 'required|string|max:225',
                 'email' => 'required|email|unique:users,email',
                 'password' => 'required|string|min:6',
                 'confirm_password' => 'required|string|min:6'
             ]);
 
-            if($request->password != $request->confirm_password){
+            if ($request->password != $request->confirm_password) {
                 return ResponseFormatter::error([
                     'message' => 'Password not Macth'
-                ], 'Authenthic Failed' ,200);
+                ], 'Authenthic Failed', 200);
             }
             User::create([
                 'name' => $request->name,
@@ -93,7 +94,16 @@ class AuthController extends Controller
                 'error' => $error
             ], 'Authenthic', 500);
         }
+    }
 
-        
+    public function logout(Request $request)
+    {
+        $token = $request->user()->currentAccessToken()->delete();
+        return ResponseFormatter::success(
+            $token,
+            'Token Revoked',
+            'Token Revoked',
+            200
+        );
     }
 }
