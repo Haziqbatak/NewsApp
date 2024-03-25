@@ -114,40 +114,43 @@ class AuthController extends Controller
         );
     }
 
-    public function updatePassword(Request $request)
-    {
+    public function updatePassword(Request $request){
         try {
-            $this->validate($request, [
+            // validate
+            $this->validate($request,[
                 'old_password' => 'required',
                 'new_password' => 'required|string|min:6',
                 'confirm_password' => 'required|string|min:6'
             ]);
-
+    
+            // get data user
             $user = Auth::user();
-
-        if(!Hash::check($request->old_password, $user->password)) {
+    
+            // check old password
+            if(!Hash::check($request->old_password, $user->password)){
+                return ResponseFormatter::error([
+                    'message' => 'Password Lama Tidak Sama'
+                ], 'Authentication Failed', 401);
+            }
+    
+            // check new password and confirm password
+            if($request->new_password != $request->confirm_password){
+                return ResponseFormatter::error([
+                    'message' => 'Password Tidak Sesuai'
+                ], 'Authentication Failed', 401);
+            }
+    
+            // update password
+            $user->password = Hash::make($request->new_password);
+            $user->save();
+    
+            return ResponseFormatter::success([
+                'message' => 'Password Berhasil Diubah'
+            ], 'Authenticated', 200);
+    
+        } catch (\Throwable $error) {
             return ResponseFormatter::error([
-                'message' => 'Password Lama Tidak Dapat Diubah'
-            ], 'Authentication Failed', 500);
-        }
-
-        if(!Hash::check($request->new_password !== $request->confirm_password)) {
-            return ResponseFormatter::error([
-                'message' => 'Password Tidak Sesuai'
-            ], 'Authentication Failed', 500);
-        }
-        
-        $user->password = Hash::make($request->new_password);
-        $user->save();
-
-        return ResponseFormatter::success([
-            'message' => 'password Berhasil Diubah'
-        ], 'Authenticated', 200);
-
-
-        } catch (\Exception $error) {
-            return ResponseFormatter::error([
-                'message' => 'Something Went Wrong',
+                'message' => 'Something went wrong',
                 'error' => $error
             ], 'Authentication Failed', 500);
         }
