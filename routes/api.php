@@ -2,7 +2,9 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\API\AuthController;
 use App\Http\Controllers\API\NewsController;
+use App\Http\Controllers\API\CategoryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,6 +24,18 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::group(['middleware' => ['auth:sanctum']], function () {
     Route::post('/logout', [\App\Http\Controllers\API\AuthController::class, 'logout']);
     Route::post('/updatePassword', [App\Http\Controllers\API\AuthController::class, 'updatePassword']);
+    Route::post('/create-profile', [AuthController::class,    'createProfile']);
+});
+
+Route::group(['middleware' => ['auth:sanctum', 'admin']], function (){
+    Route::post('/category/create', [CategoryController::class , 'store']);
+    Route::post('/category/update/{id}', [CategoryController::class, 'update']);
+    Route::delete('/category/destroy/{id}', [CategoryController::class, 'destroy']);
+
+    //Route News
+    Route::post('/news/create', [NewsController::class, 'store']);
+    Route::delete('/news/destroy/{id}', [NewsController::class,  'destroy']);
+    Route::post('/news/update/{id}', [NewsController::class, 'update']);
 });
 
 Route::get('/allUser', [App\Http\Controllers\API\AuthController::class, 'AllUsers']);

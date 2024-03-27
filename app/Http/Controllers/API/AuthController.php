@@ -4,11 +4,14 @@ namespace App\Http\Controllers\API;
 
 use Exception;
 use App\Models\User;
+use App\Models\Category;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Helpers\ResponseFormatter;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 
 class AuthController extends Controller
 {
@@ -44,7 +47,7 @@ class AuthController extends Controller
                 'access_token' => $tokenResult,
                 'token_type' => 'Bearer',
                 'user' => $user
-            ], 'Authentication Failed', 200);
+            ], 'Authentication succes', 200);
         } catch (Exception $error) {
             return ResponseFormatter::error([
                 'message'  => 'Something went wrong',
@@ -152,6 +155,40 @@ class AuthController extends Controller
             return ResponseFormatter::error([
                 'message' => 'Something went wrong',
                 'error' => $error
+            ], 'Authentication Failed', 500);
+        }
+    }
+
+    public function createProfile(Request $request)
+    {
+        try {
+            $this->validate($request, [
+                'first_name' => 'required|string|max:200',
+                'image' => 'required|image|mimes:jpg,jpeg,png|max:2048'
+            ]);
+
+            // get usr login
+            $user = auth()->user();
+
+                //  upload gambar baru 
+                $image = $request->file('image');
+                $image->storeAs('public/profile', $image->hashName());
+
+                // update image
+                $user->profile()->create([
+                    'first_name' => $request->first_name,
+                    'image'      => $image->hashName()
+                ]);
+            
+            return ResponseFormatter::success([
+                'profile'=>$user->profile
+            ], 
+            'profile updated'
+            );
+        } catch (\Exception $error) {
+            return ResponseFormatter::error([
+                'message' => 'Something wrong',
+                'error' => $error,
             ], 'Authentication Failed', 500);
         }
     }
