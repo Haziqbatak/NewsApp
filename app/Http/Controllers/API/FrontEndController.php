@@ -10,7 +10,8 @@ use App\Http\Controllers\Controller;
 class FrontEndController extends Controller
 {
     //
-    public function index(){
+    public function index()
+    {
         try {
             //code...
             $news = News::latest()->limit(3)->get();

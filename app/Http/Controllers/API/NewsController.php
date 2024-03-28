@@ -143,6 +143,5 @@ class NewsController extends Controller
         }
     }
 
-    // update profile
     
 }

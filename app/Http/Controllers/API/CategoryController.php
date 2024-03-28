@@ -122,7 +122,9 @@ class CategoryController extends Controller
             ], 'Aunthenticitaed ', 500);
         }
     }
-    public function destroy($id){
+
+    public function destroy($id)
+    {
         try {
             $category = Category::findOrfail($id);
             

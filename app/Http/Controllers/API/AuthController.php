@@ -192,4 +192,50 @@ class AuthController extends Controller
             ], 'Authentication Failed', 500);
         }
     }
-}
+
+    public function updateProfile(Request $request)
+    {
+        try {
+            $this->validate($request, [
+                'first_name' => 'required',
+                'image' => 'image|mimes:jpeg,png,jpg,gif|max:208000'
+            ]);
+    
+            $user = auth()->user();
+    
+            if(!$user->profile){
+                return ResponseFormatter::error([
+                    'message' => 'Profile not Found',
+                ], 'Failed to update Profile', 404);
+            }
+            
+            if ($request->file('image') == '') {
+                $user->profile->update([
+                    'first_name' => $request->first_name
+                ]);
+    
+            } else {
+                Storage::delete('public/profile/' . basename($user->profile->image));
+    
+                $image = $request->file('image');
+                $image->storeAs('public/profile', $image->getClientOriginalName());
+    
+                $user->profile->update([
+                    'first_name' => $request->first_name,
+                    'image' => $image->getClientOriginalName()
+                ]);
+    
+                return ResponseFormatter::success(
+                    $user,
+                    'data berhasil di update'
+                );
+            }
+        } catch (\Exception $error) {
+            return ResponseFormatter::error([
+                'message' => 'Something wrong',
+                'error' => $error,
+            ], 'Authentication Failed', 500);
+        }
+        }
+    }
+
